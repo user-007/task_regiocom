@@ -1,0 +1,71 @@
+//Only this description was paraphrased by ChatGPT, for information purposes
+
+To develop the Newsservice microservice with the described features, you can follow the RESTful API design principles. Below, I'll outline the API endpoints and their functionalities:
+
+Read news:
+Endpoint: GET /news
+Description: Returns all news that are new and have not been read yet for a specific role/accountID.
+Input:
+accountID (unique ID of the user's account)
+role (the role of the user making the request)
+Output:
+List of news (0 to x) that match the criteria.
+Create news:
+Endpoint: POST /news
+Description: Creates a new news entry.
+Input (in JSON format):
+title (string): The title of the news.
+text (string, Markdown): The content of the news in Markdown format.
+valid_from (date/time): The start date/time of the news validity.
+valid_to (date/time): The end date/time of the news validity.
+allowed_roles (array of strings): The roles that are allowed to read this news.
+accountID (string): The unique ID of the user's account who is creating the news.
+Edit news:
+Endpoint: PUT /news/{newsID}
+Description: Edits an existing news entry.
+Input (in JSON format):
+title (string): The updated title of the news.
+text (string, Markdown): The updated content of the news in Markdown format.
+valid_from (date/time): The updated start date/time of the news validity.
+valid_to (date/time): The updated end date/time of the news validity.
+Delete news:
+Endpoint: DELETE /news/{newsID}
+Description: Deletes a specific news entry.
+Input:
+newsID (string): The ID of the news to be deleted.
+Set read status:
+Endpoint: PUT /news/{newsID}/read
+Description: Sets the read status of a specific news for a user.
+Input (in JSON format):
+accountID (string): The unique ID of the user's account who is updating the read status.
+read_date (date/time): The date/time when the news was read.
+Get picture:
+Endpoint: GET /news/{newsID}/picture/{pictureID}
+Description: Returns a specific picture associated with a news entry.
+Input:
+newsID (string): The ID of the news containing the picture.
+pictureID (string): The ID of the picture to be retrieved.
+Admin - Create a new role:
+Endpoint: POST /admin/roles
+Description: Creates a new user role.
+Input (in JSON format):
+role_name (string): The name of the new role.
+Admin - Change or delete role:
+Endpoint: PUT /admin/roles/{roleID}
+Description: Updates an existing user role or deletes it.
+Input (in JSON format):
+role_name (string): The updated name of the role (for role update).
+action (string): Can be 'update' or 'delete', specifying the action to be taken.
+Publisher - Picture Upload:
+Endpoint: POST /news/{newsID}/picture
+Description: Uploads a picture for a specific news entry.
+Input (as a file upload):
+Picture file (image data).
+picture_name (string): The name of the picture.
+meta_data (string, optional): Any additional metadata related to the picture.
+Please note that the API endpoints, input formats, and error handling should be tailored to your specific programming language and framework. Additionally, you may want to add authentication and authorization mechanisms to ensure that only authenticated users with the appropriate roles can access certain endpoints.
+
+
+
+
+
